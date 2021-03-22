@@ -1,10 +1,18 @@
 
 @import './shared/fonts.scss';
 @import './shared/index';
+@import './components/header';
+
+
 html, body {
   height: 100%;
   width: 100%;
   font-family: 'Montserrat', 'Helvetica' !important;
+}
+
+
+.absolute {
+  position:sticky;
 }
 
 .self-typed{

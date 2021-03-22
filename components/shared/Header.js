@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   Collapse,
   Navbar,
@@ -6,95 +7,54 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
 } from "reactstrap";
 
-import Link from "next/link";
+const BsNavBrand = () => (
+  <Link href="/">
+    <a className="navbar-brand port-navbar-brand">Irfan Maulana</a>
+  </Link>
+);
 
-// const Header = (props) => {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const toggle = () => setIsOpen(!isOpen);
-
-//   return (
-//     <div>
-// <Navbar color="light" light expand="md">
-//   <NavbarBrand href="/">reactstrap</NavbarBrand>
-//   <NavbarToggler onClick={toggle} />
-//   <Collapse isOpen={isOpen} navbar>
-//     <Nav className="mr-auto" navbar>
-//       <NavItem>
-//         <NavLink href="/components/">Components</NavLink>
-//       </NavItem>
-//       <NavItem>
-//         <NavLink href="https://github.com/reactstrap/reactstrap">
-//           GitHub
-//         </NavLink>
-//       </NavItem>
-//       <UncontrolledDropdown nav inNavbar>
-//         <DropdownToggle nav caret>
-//           Options
-//         </DropdownToggle>
-//         <DropdownMenu right>
-//           <DropdownItem>Option 1</DropdownItem>
-//           <DropdownItem>Option 2</DropdownItem>
-//           <DropdownItem divider />
-//           <DropdownItem>Reset</DropdownItem>
-//         </DropdownMenu>
-//       </UncontrolledDropdown>
-//     </Nav>
-//     <NavbarText>Simple Text</NavbarText>
-//   </Collapse>
-// </Navbar>
-//     </div>
-//   );
-// };
-
-// export default Header;
 const BsNavLink = (props) => {
-  const { title, href } = props;
+  const { href, title } = props;
   return (
     <Link href={href}>
-      <a className="nav-link">{title}</a>
+      <a className=" nav-link port-navbar-link">{title}</a>
     </Link>
   );
 };
 
-export default class Header extends React.Component {
-  state = { isOpen: false };
-  toggle = () => this.setState({ isOpen: !this.state.isOpen });
+const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
 
-  render() {
-    return (
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
-        <NavbarToggler onClick={this.toggle} />
-        <Collapse isOpen={this.isOpen} navbar>
+  return (
+    <div>
+      <Navbar className="port-navbar port-default absolute" dark expand="md">
+        <BsNavBrand />
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem>
+            <NavItem className="port-navbar-item">
               <BsNavLink href="/" title="Home" />
             </NavItem>
-            <NavItem>
+            <NavItem className="port-navbar-item">
               <BsNavLink href="/about" title="About" />
             </NavItem>
-            <NavItem>
+            <NavItem className="port-navbar-item">
               <BsNavLink href="/portfolios" title="Portfolios" />
             </NavItem>
-            <NavItem>
+            <NavItem className="port-navbar-item">
               <BsNavLink href="/blogs" title="Blogs" />
             </NavItem>
-            <NavItem>
-              <BsNavLink href="/cv" title="CV" />
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/cv" title="Cv" />
             </NavItem>
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
         </Collapse>
       </Navbar>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Header;
