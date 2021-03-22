@@ -4,7 +4,7 @@ import BasePage from "@/components/BasePage";
 import { useGetPosts } from "@/actions";
 
 const Portfolios = () => {
-  const { posts, error } = useGetPosts();
+  const { data, error } = useGetPosts();
 
   const renderPosts = (posts) => {
     return posts.map((post) => (
@@ -18,9 +18,7 @@ const Portfolios = () => {
 
   return (
     <BaseLayout>
-      <BasePage>
-        <ul>{renderPosts(posts)}</ul>
-      </BasePage>
+      <BasePage>{data && <ul>{renderPosts(data)}</ul>}</BasePage>
     </BaseLayout>
   );
 };
