@@ -2,6 +2,7 @@ import { Col, Container, Row } from "reactstrap";
 import BaseLayout from "@/components/layouts/BaseLayout";
 import Typed from "react-typed";
 import BasePage from "@/components/BasePage";
+import { useGetUser } from "@/actions/user";
 
 const ROLES = [
   "Developer",
@@ -12,6 +13,8 @@ const ROLES = [
   "Next.js",
 ];
 const Index = () => {
+  const { data } = useGetUser();
+
   return (
     <div>
       <BaseLayout className="cover">
