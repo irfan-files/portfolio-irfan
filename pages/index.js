@@ -13,11 +13,11 @@ const ROLES = [
   "Next.js",
 ];
 const Index = () => {
-  const { data } = useGetUser();
+  const { data, error, loading } = useGetUser();
 
   return (
     <div>
-      <BaseLayout className="cover">
+      <BaseLayout user={data} loading={loading} className="cover">
         <BasePage>
           <div className="main-section">
             <div className="background-image">

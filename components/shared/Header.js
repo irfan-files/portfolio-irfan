@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
-
+const BsNavLink = (props) => {
+  const { href, title } = props;
+  return (
+    <Link href={href}>
+      <a className="nav-link port-navbar-link">{title}</a>
+    </Link>
+  );
+};
 const BsNavBrand = () => (
   <Link href="/">
-    <a className="navbar-brand port-navbar-brand">Irfan Maulana</a>
+    <a className="navbar-brand port-navbar-brand">IRFAN</a>
   </Link>
-);
-
-const LogoutLink = () => (
-  <span className="nav-link port-navbar-link clickable">Logout</span>
 );
 
 const LoginLink = () => (
@@ -18,22 +21,17 @@ const LoginLink = () => (
   </a>
 );
 
-const BsNavLink = (props) => {
-  const { href, title } = props;
-  return (
-    <Link href={href}>
-      <a className=" nav-link port-navbar-link">{title}</a>
-    </Link>
-  );
-};
-
-const Header = () => {
+const LogoutLink = () => (
+  <a className="nav-link port-navbar-link" href="/api/v1/logout">
+    Logout
+  </a>
+);
+const Header = ({ user, loading }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-
   return (
     <div>
-      <Navbar className="port-navbar port-default absolute" dark expand="md">
+      <Navbar className="port-navbar port-default absolute " dark expand="md">
         <BsNavBrand />
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -53,19 +51,29 @@ const Header = () => {
             <NavItem className="port-navbar-item">
               <BsNavLink href="/cv" title="Cv" />
             </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/secret" title="Secret" />
+            </NavItem>
           </Nav>
           <Nav navbar>
-            <NavItem className="port-navbar-item">
-              <LoginLink />
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <LogoutLink />
-            </NavItem>
+            {!loading && (
+              <>
+                {user && (
+                  <NavItem className="port-navbar-item">
+                    <LogoutLink />
+                  </NavItem>
+                )}
+                {!user && (
+                  <NavItem className="port-navbar-item">
+                    <LoginLink />
+                  </NavItem>
+                )}
+              </>
+            )}
           </Nav>
         </Collapse>
       </Navbar>
     </div>
   );
 };
-
 export default Header;
